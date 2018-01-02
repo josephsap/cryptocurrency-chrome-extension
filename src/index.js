@@ -1,13 +1,14 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
-import thunkMiddleware from 'redux-thunk'
+import createSagaMiddleware from 'redux-saga';
 import { createStore, applyMiddleware, compose } from 'redux';
 import './index.css';
 import rootReducer from './reducers';
-import promise from 'redux-promise';
-import { fetchCoins } from './actions/fetch_coins';
-import App from './components/app';
+import apiSaga from './sagas';
+// import promise from 'redux-promise';
+// import { fetchCoins } from './actions/fetch_coins';
+import AppContainer from './containers/app_container';
 import registerServiceWorker from './registerServiceWorker';
 
 
@@ -18,20 +19,26 @@ function devToolsCompose(...args) {
   return compose.apply(null, args);
 }
 
+const sagaMiddleware = createSagaMiddleware();
 
 const configureStore = createStore (
   rootReducer,
   devToolsCompose(
-    applyMiddleware(promise, thunkMiddleware)
+    applyMiddleware(sagaMiddleware)
   )
 );
 
-configureStore.dispatch(fetchCoins());
+sagaMiddleware.run(apiSaga);
+
+// const action = type => store.dispatch({ type });
+
+
+// configureStore.dispatch(fetchCoins());
 
 
 ReactDOM.render(
   <Provider store={configureStore}>
-    <App />
+    <AppContainer />
   </Provider>,
   document.getElementById('root')
 );

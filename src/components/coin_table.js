@@ -1,12 +1,14 @@
 import React from 'react';
 import SearchForm from './search_form';
+import REQUEST_API_DATA from '../constants';
+import { requestApiData } from '../sagas';
 
-const CoinTable = ({coins, searchFormText, fetchCoins, searchFormEntry, intervalFunction}) => {
-  let coin = coins[0];
+const CoinTable = ({ coin, searchFormText, searchFormEntry }) => {
+  
   return (
     <div className="container">
       <div>
-        <p>{coin.name}</p>
+        <p>{coin.id}</p>
         <p>{coin.price_usd}</p>
         <p>{coin.percent_change_1h}</p>
         <p>{coin.percent_change_24h}</p>
@@ -14,8 +16,7 @@ const CoinTable = ({coins, searchFormText, fetchCoins, searchFormEntry, interval
       <SearchForm 
         searchFormText={searchFormText}
         searchFormEntry={searchFormEntry}
-        fetchCoins={fetchCoins}
-        intervalFunction={intervalFunction}
+        onClick={requestApiData(searchFormText)}
         />
     </div>
   );
