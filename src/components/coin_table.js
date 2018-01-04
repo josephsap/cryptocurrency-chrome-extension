@@ -1,11 +1,15 @@
 import React from 'react';
 import SearchForm from './search_form';
 
-const CoinTable = ({coins, searchFormText, fetchCoins, searchFormEntry, intervalFunction}) => {
+const CoinTable = ({coins, searchFormText, fetchCoins, searchFormEntry, coinName, currentlyDisplayedCoin}) => {
   let coin = coins[0];
   return (
     <div className="container">
+      <p>{coinName}</p>
+      <hr />
+      <hr />
       <div>
+        {/*  */}
         <p>{coin.name}</p>
         <p>{coin.price_usd}</p>
         <p>{coin.percent_change_1h}</p>
@@ -15,7 +19,8 @@ const CoinTable = ({coins, searchFormText, fetchCoins, searchFormEntry, interval
         searchFormText={searchFormText}
         searchFormEntry={searchFormEntry}
         fetchCoins={fetchCoins}
-        intervalFunction={intervalFunction}
+        coinName={coinName}
+        currentlyDisplayedCoin={currentlyDisplayedCoin}
         />
     </div>
   );

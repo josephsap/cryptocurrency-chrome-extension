@@ -1,51 +1,74 @@
 import React, { Component } from 'react';
+import Select from 'react-select';
+import 'react-select/dist/react-select.css';
 
 
 class SearchForm extends Component {
 
+  state = {
+    selectedOption: ''
+  }
+
   componentDidMount = () => {
-    console.log('mount, stuff', this.props.intervalFunction)
-    // this.refreshData();
-    // let intervalFunction = setInterval(this.refreshData, 8000);
+    // let { searchFormText } = this.props;
+    // console.log('mount, stuff', this.props.searchFormText)
+    // this.intervalID = setInterval(this.refreshData(searchFormText, 10000));
+    // 306000 = 5mins
+    console.log('coin*name', this.props.coinName)
   }
 
   componentWillUnmount = () => {
-
+    // console.log('unmount', this.intervalID)
+    // clearInterval(this.intervalID);
   }
 
-  refreshData = () => {
+  refreshData = (searchTerm) => {
 
-    this.props.fetchCoins(this.props.searchFormText);
-    // console.log('hi,', this.props.searchFormText)
-    // every 5mins, call API to refresh coin data
-    // coinmarketcap API updates every 5min
-    // setInterval(() => {
-    //   // console.log(this.props, 'in interval')
-    //   this.props.fetchCoins(this.props.searchFormText);
-    // }, 8000);
-    // 306000 = 5mins
+    // console.log(searchTerm, 'in refresh data fn')
+    // if(searchTerm === undefined) {
+    //   this.props.fetchCoins('ethereum');
+    // } else {
+    //   this.props.fetchCoins(searchTerm);
+    // }
+    // clearInterval(this.intervalID);
+    
   }
 
-  handleChange = (e) => {
-    this.props.searchFormEntry(e.target.value);
+  handleChange = (selectedOption) => {
+    // this.props.searchFormEntry(e.target.value);
+    this.setState({ selectedOption });
+    console.log(`Selected: ${selectedOption.label}`);
   }
 
   handleSubmit = (e) => {
     e.preventDefault();
     this.props.fetchCoins(this.props.searchFormText);
+
+    // we are setting the current coin name here.
+    // if it is different from the search form text entered,
+    // dispatch action w/new coin name
+    console.log(this.props.coinName, '0000', this.props.searchFormText)
+    if(this.props.coinName !== this.props.searchFormText) {
+      this.props.currentlyDisplayedCoin(this.props.searchFormText);
+    }
   }
 
 
   render() {
+    const { selectedOption } = this.state;
+    const value = selectedOption && selectedOption.value;
     return (
       <form onSubmit={this.handleSubmit}>
         <label name="search-input" className="sr-only">Coin Search Entry Field</label>
-        <input 
-          type="text"
-          value={this.props.searchFormText}
+         <Select
+          name="form-field-name"
+          value={value}
           onChange={this.handleChange}
-          id="search-input"
-         />
+          options={[
+            { value: 'one', label: 'One' },
+            { value: 'two', label: 'Two' },
+          ]}
+        />
         <button type="submit">Search</button>
       </form>
     );
