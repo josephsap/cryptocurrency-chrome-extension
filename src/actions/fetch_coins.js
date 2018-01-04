@@ -21,15 +21,15 @@ export function receiveCoins(coins) {
 
 
 // Thunk action creators: make network requests.
-export function fetchCoins(searchTerm) {
+export function fetchCoins() {
 
-  if(searchTerm === undefined) {
-    searchTerm = 'ethereum';
-  }
+  // if(searchTerm === undefined) {
+  //   searchTerm = 'ethereum';
+  // }
 
   return function(dispatch) {
-    dispatch(requestCoins(searchTerm));
-    return axios.get(`${API_BASE_URL}${searchTerm}/`)
+    dispatch(requestCoins());
+    return axios.get(`${API_BASE_URL}?limit=10`)
       .then(response => {
         dispatch(receiveCoins(response.data));
       })

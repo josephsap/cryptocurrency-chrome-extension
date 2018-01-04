@@ -1,12 +1,12 @@
 import React, { Component } from 'react';
-import Select from 'react-select';
+import VirtualizedSelect from 'react-virtualized-select';
 import 'react-select/dist/react-select.css';
 
 
 class SearchForm extends Component {
 
   state = {
-    selectedOption: ''
+    selectValue: ''
   }
 
   componentDidMount = () => {
@@ -14,7 +14,7 @@ class SearchForm extends Component {
     // console.log('mount, stuff', this.props.searchFormText)
     // this.intervalID = setInterval(this.refreshData(searchFormText, 10000));
     // 306000 = 5mins
-    console.log('coin*name', this.props.coinName)
+    console.log('coin*name', this.props.coins)
   }
 
   componentWillUnmount = () => {
@@ -34,10 +34,10 @@ class SearchForm extends Component {
     
   }
 
-  handleChange = (selectedOption) => {
-    // this.props.searchFormEntry(e.target.value);
-    this.setState({ selectedOption });
-    console.log(`Selected: ${selectedOption.label}`);
+  updateValue = (newValue) => {
+    this.setState({
+      selectValue: newValue
+    });
   }
 
   handleSubmit = (e) => {
@@ -55,20 +55,24 @@ class SearchForm extends Component {
 
 
   render() {
-    const { selectedOption } = this.state;
-    const value = selectedOption && selectedOption.value;
+    // const { selectedOption } = this.state;
+    // const value = selectedOption && selectedOption.value;
+    const options = this.props.coins;
+    console.log(options)
     return (
       <form onSubmit={this.handleSubmit}>
         <label name="search-input" className="sr-only">Coin Search Entry Field</label>
-         <Select
-          name="form-field-name"
-          value={value}
-          onChange={this.handleChange}
-          options={[
-            { value: 'one', label: 'One' },
-            { value: 'two', label: 'Two' },
-          ]}
-        />
+          <VirtualizedSelect ref="coinSelect"
+            options={options}
+            simpleValue
+            clearable
+            name="select-coin"
+            value={this.state.selectValue}
+            onChange={this.updateValue}
+            searchable
+            labelKey="name"
+            valueKey="name"
+          />
         <button type="submit">Search</button>
       </form>
     );

@@ -21,6 +21,7 @@ const CoinTable = ({coins, searchFormText, fetchCoins, searchFormEntry, coinName
         fetchCoins={fetchCoins}
         coinName={coinName}
         currentlyDisplayedCoin={currentlyDisplayedCoin}
+        coins={coins}
         />
     </div>
   );
