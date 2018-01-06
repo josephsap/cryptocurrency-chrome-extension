@@ -29,7 +29,7 @@ export function fetchCoins() {
 
   return function(dispatch) {
     dispatch(requestCoins());
-    return axios.get(`${API_BASE_URL}?limit=10`)
+    return axios.get(`${API_BASE_URL}`)
       .then(response => {
         dispatch(receiveCoins(response.data));
       })

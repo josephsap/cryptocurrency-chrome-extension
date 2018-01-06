@@ -3,8 +3,7 @@ import { REQUEST_COINS, RECEIVE_COINS } from '../constants';
 export default function coinsReducer(
   state = {
     isFetching: false,
-    coins: [],
-    intervalFunction: null
+    coins: []
   }, 
   action
 ) {

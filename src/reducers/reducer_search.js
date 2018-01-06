@@ -3,7 +3,7 @@ import { SEARCH_FORM_ENTRY, CURRENT_DISPLAYED_COIN } from '../constants';
 export default function(
   state = {
     searchFormText: '',
-    coinName: 'ethereum'
+    coinItem: {}
   }, 
   action
 ) {
@@ -12,7 +12,7 @@ export default function(
       return { ...state, searchFormText: action.searchFormText };
 
     case CURRENT_DISPLAYED_COIN:
-      return { ...state, coinName: action.coinName };
+      return { ...state, coinItem: action.coinItem };
       
     default:
       return state;

@@ -8,9 +8,9 @@ export function searchFormEntry(searchFormText) {
 }
 
 
-export function currentlyDisplayedCoin(coinName) {
+export function currentlyDisplayedCoin(coinItem) {
   return {
     type: CURRENT_DISPLAYED_COIN,
-    coinName: coinName
+    coinItem: coinItem
   };
 }

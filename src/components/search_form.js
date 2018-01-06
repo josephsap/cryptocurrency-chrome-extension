@@ -5,16 +5,12 @@ import 'react-select/dist/react-select.css';
 
 class SearchForm extends Component {
 
-  state = {
-    selectValue: ''
-  }
-
   componentDidMount = () => {
     // let { searchFormText } = this.props;
     // console.log('mount, stuff', this.props.searchFormText)
     // this.intervalID = setInterval(this.refreshData(searchFormText, 10000));
     // 306000 = 5mins
-    console.log('coin*name', this.props.coins)
+    // console.log('coin*name', this.props.coins)
   }
 
   componentWillUnmount = () => {
@@ -35,14 +31,20 @@ class SearchForm extends Component {
   }
 
   updateValue = (newValue) => {
-    this.setState({
-      selectValue: newValue
-    });
+    this.props.searchFormEntry(newValue);
   }
 
   handleSubmit = (e) => {
     e.preventDefault();
-    this.props.fetchCoins(this.props.searchFormText);
+    // console.log(this.props.searchFormText, 'hi')
+    // this.props.fetchCoins(this.props.searchFormText);
+
+    // take selected value
+    // loop through props.coins
+    // find matching id
+    // display
+
+    this.props.currentlyDisplayedCoin(this.props.searchFormText);
 
     // we are setting the current coin name here.
     // if it is different from the search form text entered,
@@ -50,31 +52,29 @@ class SearchForm extends Component {
     console.log(this.props.coinName, '0000', this.props.searchFormText)
     if(this.props.coinName !== this.props.searchFormText) {
       this.props.currentlyDisplayedCoin(this.props.searchFormText);
+      // this.props.fetchCoins(this.props.searchFormText);
     }
   }
 
 
   render() {
-    // const { selectedOption } = this.state;
-    // const value = selectedOption && selectedOption.value;
     const options = this.props.coins;
-    console.log(options)
+    console.log(this.props.coins, 'option')
     return (
-      <form onSubmit={this.handleSubmit}>
-        <label name="search-input" className="sr-only">Coin Search Entry Field</label>
-          <VirtualizedSelect ref="coinSelect"
-            options={options}
-            simpleValue
-            clearable
-            name="select-coin"
-            value={this.state.selectValue}
-            onChange={this.updateValue}
-            searchable
-            labelKey="name"
-            valueKey="name"
-          />
-        <button type="submit">Search</button>
-      </form>
+      <div>
+        <VirtualizedSelect ref="coinSelect"
+          options={options}
+          simpleValue
+          clearable
+          name="select-coin"
+          value={this.props.searchFormText}
+          onChange={this.updateValue}
+          searchable
+          labelKey="name"
+          valueKey="name"
+        />
+        <button type="submit" onClick={this.handleSubmit}>Search</button>
+      </div>
     );
   }
 }
