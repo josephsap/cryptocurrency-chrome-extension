@@ -1,7 +1,7 @@
 import React from 'react';
 import SearchForm from './search_form';
 
-const CoinTable = ({coins, searchFormText, fetchCoins, searchFormEntry, coinName, currentlyDisplayedCoin}) => {
+const CoinTable = ({coins, searchFormText, fetchCoins, searchFormEntry, coinName, addCoin, coinCollection, currentlyDisplayedCoin}) => {
   let coin = coins[0];
   return (
     <div className="container">
@@ -22,6 +22,8 @@ const CoinTable = ({coins, searchFormText, fetchCoins, searchFormEntry, coinName
         coinName={coinName}
         currentlyDisplayedCoin={currentlyDisplayedCoin}
         coins={coins}
+        addCoin={addCoin}
+        coinCollection={coinCollection}
         />
     </div>
   );
