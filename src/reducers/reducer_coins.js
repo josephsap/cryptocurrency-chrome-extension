@@ -1,9 +1,10 @@
-import { REQUEST_COINS, RECEIVE_COINS } from '../constants';
+import { REQUEST_COINS, RECEIVE_COINS, ADD_COIN } from '../constants';
 
 export default function coinsReducer(
   state = {
     isFetching: false,
-    coins: []
+    coins: [],
+    coinCollection: []
   }, 
   action
 ) {
@@ -14,6 +15,9 @@ export default function coinsReducer(
     case RECEIVE_COINS:
       return { ...state, isFetching: false, coins: action.coins };
       
+    case ADD_COIN:
+      return { ...state, coinCollection: [...state.coinCollection,  action.selectedCoin] };
+
     default:
       return state;
   }
