@@ -2,6 +2,12 @@ import React, { Component } from 'react';
 import SearchForm from './search_form';
 
 class CoinTable extends Component {
+
+  handleDelete = (id) => {
+    console.log(id)
+    this.props.deleteCoin(id);
+  } 
+
   render() {
     const { 
       coins,
@@ -9,6 +15,7 @@ class CoinTable extends Component {
       fetchCoins, 
       searchFormEntry,
       addCoin,
+      deleteCoin,
       coinCollection 
     } = this.props;
     const coin = coins[0];
@@ -19,6 +26,7 @@ class CoinTable extends Component {
           <p>{coinItem.price_usd}</p>
           <p>{coinItem.percent_change_1h}</p>
           <p>{coinItem.percent_change_24h}</p>
+          <button className="btn btn-outline-secondary" onClick={((e) => this.handleDelete(coinItem.id))} type="button">Remove</button>
         </li>
       );
     });

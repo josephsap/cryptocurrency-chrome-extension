@@ -1,4 +1,4 @@
-import { REQUEST_COINS, RECEIVE_COINS, ADD_COIN } from '../constants';
+import { REQUEST_COINS, RECEIVE_COINS, ADD_COIN, DELETE_COIN } from '../constants';
 
 export default function coinsReducer(
   state = {
@@ -18,6 +18,9 @@ export default function coinsReducer(
     case ADD_COIN:
       return { ...state, coinCollection: [...state.coinCollection,  action.selectedCoin] };
 
+    case DELETE_COIN:
+      // console.log(state.coinCollection.filter(coin => coin.id !== action.id))
+      return state.coinCollection.filter(coin => coin.id !== action.id);
     default:
       return state;
   }
