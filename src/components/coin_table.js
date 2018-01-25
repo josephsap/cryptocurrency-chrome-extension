@@ -18,6 +18,7 @@ class CoinTable extends Component {
       deleteCoin,
       coinCollection 
     } = this.props;
+
     const coin = coins[0];
     const renderCoinCollection = coinCollection.map((coinItem) => {
       return (

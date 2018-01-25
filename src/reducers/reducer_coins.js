@@ -16,11 +16,15 @@ export default function coinsReducer(
       return { ...state, isFetching: false, coins: action.coins };
       
     case ADD_COIN:
+      let cns = [...state.coins];
+      console.log(cns)
+      let coinAlreadyInCollection = cns.filter(coin => coin.id == action.selectedCoin.id);
+      console.log(action.selectedCoin.id, '0000', coinAlreadyInCollection);
       return { ...state, coinCollection: [...state.coinCollection,  action.selectedCoin] };
 
     case DELETE_COIN:
-      // console.log(state.coinCollection.filter(coin => coin.id !== action.id))
-      return state.coinCollection.filter(coin => coin.id !== action.id);
+      return { ...state, coinCollection: [...state.coinCollection.filter(coin => coin.id !== action.id)] };
+
     default:
       return state;
   }
