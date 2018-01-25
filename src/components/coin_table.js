@@ -6,6 +6,7 @@ class CoinTable extends Component {
   handleDelete = (id) => {
     console.log(id)
     this.props.deleteCoin(id);
+    this.props.disableCoin(id);
   } 
 
   render() {
@@ -15,8 +16,8 @@ class CoinTable extends Component {
       fetchCoins, 
       searchFormEntry,
       addCoin,
-      deleteCoin,
-      coinCollection 
+      coinCollection,
+      disableCoin
     } = this.props;
 
     const coin = coins[0];
@@ -27,6 +28,7 @@ class CoinTable extends Component {
           <p>{coinItem.price_usd}</p>
           <p>{coinItem.percent_change_1h}</p>
           <p>{coinItem.percent_change_24h}</p>
+          <p>{coinItem.selected}</p>
           <button className="btn btn-outline-secondary" onClick={((e) => this.handleDelete(coinItem.id))} type="button">Remove</button>
         </li>
       );
@@ -41,6 +43,7 @@ class CoinTable extends Component {
             fetchCoins={fetchCoins}
             coins={coins}
             addCoin={addCoin}
+            disableCoin={disableCoin}
             coinCollection={coinCollection}
           />
         

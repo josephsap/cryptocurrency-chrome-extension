@@ -1,4 +1,4 @@
-import { REQUEST_COINS, RECEIVE_COINS, ADD_COIN, DELETE_COIN } from '../constants';
+import { REQUEST_COINS, RECEIVE_COINS, ADD_COIN, DELETE_COIN, DISABLE_COIN } from '../constants';
 
 export default function coinsReducer(
   state = {
@@ -14,12 +14,15 @@ export default function coinsReducer(
 
     case RECEIVE_COINS:
       return { ...state, isFetching: false, coins: action.coins };
+
+    case DISABLE_COIN:
+      let cns = [...state.coins];
+      let match = cns.find(item => item.id === action.id);
+      match.disabled ? match.disabled = false : match.disabled = true;
+      let newCoinState = Object.assign(cns, match);
+      return { ...state, coins: newCoinState};
       
     case ADD_COIN:
-      let cns = [...state.coins];
-      console.log(cns)
-      let coinAlreadyInCollection = cns.filter(coin => coin.id == action.selectedCoin.id);
-      console.log(action.selectedCoin.id, '0000', coinAlreadyInCollection);
       return { ...state, coinCollection: [...state.coinCollection,  action.selectedCoin] };
 
     case DELETE_COIN:

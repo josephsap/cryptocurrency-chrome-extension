@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { fetchCoins } from '../actions/fetch_coins';
-import { searchFormEntry, addCoin } from '../actions/search_form_entry';
+import { searchFormEntry, addCoin, disableCoin } from '../actions/search_form_entry';
 import { deleteCoin } from '../actions/delete_coin';
 import CoinTable from '../components/coin_table';
 
@@ -20,6 +20,7 @@ class AppContainer extends Component {
             searchFormText={this.props.searchFormText}
             searchFormEntry={this.props.searchFormEntry}
             addCoin={this.props.addCoin}
+            disableCoin={this.props.disableCoin}
             deleteCoin={this.props.deleteCoin}
             coinCollection={this.props.coinCollection}
           />
@@ -41,7 +42,7 @@ function mapStateToProps(state) {
 }
 
 function mapDispatchToProps(dispatch) {
-  return bindActionCreators({ searchFormEntry, fetchCoins, addCoin, deleteCoin }, dispatch);
+  return bindActionCreators({ searchFormEntry, fetchCoins, addCoin, deleteCoin, disableCoin }, dispatch);
 }
 
 

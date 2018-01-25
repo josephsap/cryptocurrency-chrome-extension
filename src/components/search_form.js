@@ -1,5 +1,8 @@
 import React, { Component } from 'react';
 import VirtualizedSelect from 'react-virtualized-select';
+
+import 'react-virtualized/styles.css'
+import 'react-virtualized-select/styles.css'
 import 'react-select/dist/react-select.css';
 
 
@@ -46,8 +49,9 @@ class SearchForm extends Component {
         chosenCoin = item;
       }
     });
-    this.props.addCoin(chosenCoin);
 
+    this.props.addCoin(chosenCoin);
+    this.props.disableCoin(chosenCoin.id);
     this.props.searchFormEntry('');
   
   }
