@@ -9,6 +9,7 @@ import promise from 'redux-promise';
 import { fetchCoins } from './actions/fetch_coins';
 import App from './components/app';
 import registerServiceWorker from './registerServiceWorker';
+import { loadState, saveState } from './localStorageFunctions';
 
 
 function devToolsCompose(...args) {
@@ -18,9 +19,12 @@ function devToolsCompose(...args) {
   return compose.apply(null, args);
 }
 
+const persistedState = loadState();
+
 
 const configureStore = createStore (
   rootReducer,
+  persistedState,
   devToolsCompose(
     applyMiddleware(promise, thunkMiddleware)
   )
@@ -28,6 +32,10 @@ const configureStore = createStore (
 
 configureStore.dispatch(fetchCoins());
 
+
+configureStore.subscribe(() => {
+  saveState(configureStore.getState());
+});
 
 ReactDOM.render(
   <Provider store={configureStore}>
