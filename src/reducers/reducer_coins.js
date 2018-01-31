@@ -1,4 +1,5 @@
 import { REQUEST_COINS, RECEIVE_COINS, ADD_COIN, DELETE_COIN, DISABLE_COIN } from '../constants';
+import _ from 'lodash';
 
 export default function coinsReducer(
   state = {
@@ -13,7 +14,12 @@ export default function coinsReducer(
       return { ...state, isFetching: true };
 
     case RECEIVE_COINS:
-      return { ...state, isFetching: false, coins: action.coins };
+      // console.log(state.coinCollection.length, 'coin collection', state.coinCollection);
+      let coinCollectionState = [...state.coinCollection];
+      let currState = [action.coins];
+      let newCoins = _.merge(coinCollectionState, currState);
+      console.log(currState, 'hi-----------', coinCollectionState)
+      return { ...state, isFetching: false, coins: newCoins };
 
     case DISABLE_COIN:
       let cns = [...state.coins];
