@@ -9,28 +9,13 @@ import 'react-select/dist/react-select.css';
 class SearchForm extends Component {
 
   componentDidMount = () => {
-    // let { searchFormText } = this.props;
-    // console.log('mount, stuff', this.props.searchFormText)
-    // this.intervalID = setInterval(this.refreshData(searchFormText, 10000));
-    // 306000 = 5mins
-    // console.log('coin*name', this.props.coins)
-  }
 
-  componentWillUnmount = () => {
-    // console.log('unmount', this.intervalID)
-    // clearInterval(this.intervalID);
-  }
-
-  refreshData = (searchTerm) => {
-
-    // console.log(searchTerm, 'in refresh data fn')
-    // if(searchTerm === undefined) {
-    //   this.props.fetchCoins('ethereum');
-    // } else {
-    //   this.props.fetchCoins(searchTerm);
-    // }
-    // clearInterval(this.intervalID);
-    
+    // if a coin is already in the coin collection,
+    // disable it to prevent selection from the
+    // dropdown list.
+    this.props.coinCollection.forEach((item) => {
+      this.props.disableCoin(item.id);
+    });
   }
 
   updateValue = (newValue) => {

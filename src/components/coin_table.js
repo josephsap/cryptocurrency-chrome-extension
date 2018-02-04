@@ -4,7 +4,6 @@ import SearchForm from './search_form';
 class CoinTable extends Component {
 
   handleDelete = (id) => {
-    console.log(id)
     this.props.deleteCoin(id);
     this.props.disableCoin(id);
   } 
