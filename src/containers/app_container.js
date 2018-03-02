@@ -5,6 +5,7 @@ import { fetchCoins } from '../actions/fetch_coins';
 import { searchFormEntry, addCoin, disableCoin } from '../actions/search_form_entry';
 import { deleteCoin } from '../actions/delete_coin';
 import CoinTable from '../components/coin_table';
+import Gainers from '../components/gainers';
 
 class AppContainer extends Component {
 
@@ -13,7 +14,8 @@ class AppContainer extends Component {
     return (
       <div className="container">
         {isFetching && <div>Loading...</div>}
-        {!isFetching &&       
+        {!isFetching &&
+          <div>      
           <CoinTable 
             coins={this.props.coins}
             fetchCoins={this.props.fetchCoins}
@@ -24,6 +26,10 @@ class AppContainer extends Component {
             deleteCoin={this.props.deleteCoin}
             coinCollection={this.props.coinCollection}
           />
+          <Gainers 
+            coins={this.props.coins}
+          />
+          </div>
         }
       </div>
     );
