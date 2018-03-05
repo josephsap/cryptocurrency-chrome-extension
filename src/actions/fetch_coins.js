@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { API_BASE_URL, REQUEST_COINS, RECEIVE_COINS } from '../constants';
+import { API_BASE_URL, REQUEST_COINS, RECEIVE_COINS, SORT_GAINERS } from '../constants';
 
 
 // time to get coins
@@ -16,7 +16,7 @@ export function receiveCoins(coins) {
   return {
     type: RECEIVE_COINS,
     coins
-  }
+  };
 }
 
 
@@ -36,5 +36,13 @@ export function fetchCoins() {
       .catch(error => {
         throw(error);
       });
-  }
+  };
+}
+
+// sort through and find the gainers
+export function sortGainers(sortedGainCoins) {
+  return {
+    type: SORT_GAINERS,
+    sortedGainCoins
+  };
 }

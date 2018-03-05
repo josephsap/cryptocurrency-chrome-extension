@@ -11,3 +11,4 @@ export const CURRENT_DISPLAYED_COIN = 'CURRENT_DISPLAYED_COIN';
 export const ADD_COIN = 'ADD_COIN';
 export const DELETE_COIN = 'DELETE_COIN';
 export const DISABLE_COIN = 'DISABLE_COIN';
+export const SORT_GAINERS = 'SORT_GAINERS';

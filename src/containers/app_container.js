@@ -7,14 +7,25 @@ import { deleteCoin } from '../actions/delete_coin';
 import CoinTable from '../components/coin_table';
 import Gainers from '../components/gainers';
 
+
 class AppContainer extends Component {
 
+  componentDidMount = () => {
+    // this.timer = setInterval(() => this.getCoins(), 3000);
+  }
+
+  getCoins = () => {
+    console.log('get coins')
+    this.props.fetchCoins();
+    // need to update redux state here
+    // action creator => reducer =>, etc.
+  }
+
   render() {
-    const { isFetching } = this.props;
+    // const { isFetching } = this.props;
     return (
       <div className="container">
-        {isFetching && <div>Loading...</div>}
-        {!isFetching &&
+
           <div>      
           <CoinTable 
             coins={this.props.coins}
@@ -27,10 +38,10 @@ class AppContainer extends Component {
             coinCollection={this.props.coinCollection}
           />
           <Gainers 
-            coins={this.props.coins}
+            sortedGainerCoins={this.props.sortGainers}
           />
           </div>
-        }
+        
       </div>
     );
   }
@@ -43,7 +54,8 @@ function mapStateToProps(state) {
     coins: state.coinsReducer.coins,
     searchFormText: state.searchReducer.searchFormText,
     isFetching: state.coinsReducer.isFetching,
-    coinCollection: state.coinsReducer.coinCollection
+    coinCollection: state.coinsReducer.coinCollection,
+    sortGainers: state.coinsReducer.sortedGainCoins
   };
 }
 
