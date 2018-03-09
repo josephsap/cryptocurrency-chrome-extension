@@ -22,11 +22,6 @@ export function receiveCoins(coins) {
 
 // Thunk action creators: make network requests.
 export function fetchCoins() {
-
-  // if(searchTerm === undefined) {
-  //   searchTerm = 'ethereum';
-  // }
-
   return function(dispatch) {
     dispatch(requestCoins());
     return axios.get(`${API_BASE_URL}`)
@@ -40,9 +35,9 @@ export function fetchCoins() {
 }
 
 // sort through and find the gainers
-export function sortGainers(sortedGainCoins) {
+export function sortGainers(gainers) {
   return {
     type: SORT_GAINERS,
-    sortedGainCoins
+    gainers
   };
 }

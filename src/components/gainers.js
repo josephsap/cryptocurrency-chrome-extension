@@ -2,9 +2,14 @@ import React, { Component } from 'react';
 
 class Gainers extends Component {
 
+  componentDidMount() {
+    const { coins } = this.props.coins;
+    this.props.sortGainers(coins);
+  }
+  
   render() {
-    const {sortedGainerCoins} = this.props;
-    const posChangeCoins = sortedGainerCoins.map((coinItem) => {
+    const { gainers } = this.props;
+    const posChangeCoins = gainers.map((coinItem) => {
       return (
         <li
           key={coinItem.id}
@@ -14,7 +19,6 @@ class Gainers extends Component {
         </li>
       );
     });
-
 
     return(
       <div>

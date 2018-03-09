@@ -5,7 +5,7 @@ export default function coinsReducer(
     isFetching: false,
     coins: [],
     coinCollection: [],
-    sortedGainCoins: []
+    gainers: []
   }, 
   action
 ) {
@@ -42,7 +42,7 @@ export default function coinsReducer(
         return a.percent_change_24h - b.percent_change_24h;
       }).reverse();
       
-      return { ...state, sortedGainCoins: gainCoinsSorted };
+      return { ...state, gainers: gainCoinsSorted };
 
     default:
       return state;
