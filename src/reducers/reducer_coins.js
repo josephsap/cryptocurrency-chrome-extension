@@ -30,34 +30,18 @@ export default function coinsReducer(
       return { ...state, coinCollection: [...state.coinCollection.filter(coin => coin.id !== action.id)] };
 
     case UPDATE_COINCOLLECTION:
-      // found matching coin, now i need to update it
-      // without mutating state
       let currentCoinState = [...state.coins];
       let currentCoinCollection = [...state.coinCollection];
 
-      // see disable coin above?
+      // array.find will return the element if
+      // the id is found in the currentCoinState array.
+      // if not, it will return the element in currentCoinCollection.
+      // map is making a new array. there is no replacing
+      // of elements going on. the new array, updatedCoinCollection,
+      // becomes out current coin collection state.
+      let updatedCoinCollection = currentCoinCollection.map(obj => currentCoinState.find(item => item.id === obj.id) || obj);
 
-      // https://stackoverflow.com/questions/37585309/replacing-objects-in-array
-
-      // obj is the new state.
-      let res = currentCoinCollection.map(obj => {
-        currentCoinState.find(item => {
-          if(item.id === obj.id) {
-            console.log(item, "latest state", obj, "in collection")
-            item = obj;
-          }
-        });
-      });
-
-      console.log(currentCoinCollection)
-
-      // let coinsInCommon = currentCoinState.filter((stateitem) => {
-      //   return currentCoinCollection.some((item) => {
-      //     return item.id === stateitem.id;
-      //   });
-      // });
-      // console.log(coinsInCommon, 'hi')
-      return {...state};
+      return { ...state, coinCollection: updatedCoinCollection };
 
     case SORT_GAINERS:
       let allCoins = [...state.coins];

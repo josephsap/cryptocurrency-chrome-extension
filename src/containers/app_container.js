@@ -11,16 +11,11 @@ import Gainers from '../components/gainers';
 class AppContainer extends Component {
 
   componentDidMount = () => {
-    this.timer = setInterval(() => this.getCoins(), 300000);
+    this.timer = setInterval(() => this.getCoins(), 100000);
   }
 
   getCoins = () => {
-    console.log('get coins')
     this.props.fetchCoins();
-    // need to update redux state here
-    // action creator => reducer =>, etc.
-
-    // need to update the coin collection here
   }
 
   render() {
