@@ -1,4 +1,4 @@
-import { REQUEST_COINS, RECEIVE_COINS, ADD_COIN, DELETE_COIN, DISABLE_COIN, SORT_GAINERS } from '../constants';
+import { REQUEST_COINS, RECEIVE_COINS, ADD_COIN, DELETE_COIN, DISABLE_COIN, SORT_GAINERS, UPDATE_COINCOLLECTION } from '../constants';
 
 export default function coinsReducer(
   state = {
@@ -28,6 +28,36 @@ export default function coinsReducer(
 
     case DELETE_COIN:
       return { ...state, coinCollection: [...state.coinCollection.filter(coin => coin.id !== action.id)] };
+
+    case UPDATE_COINCOLLECTION:
+      // found matching coin, now i need to update it
+      // without mutating state
+      let currentCoinState = [...state.coins];
+      let currentCoinCollection = [...state.coinCollection];
+
+      // see disable coin above?
+
+      // https://stackoverflow.com/questions/37585309/replacing-objects-in-array
+
+      // obj is the new state.
+      let res = currentCoinCollection.map(obj => {
+        currentCoinState.find(item => {
+          if(item.id === obj.id) {
+            console.log(item, "latest state", obj, "in collection")
+            item = obj;
+          }
+        });
+      });
+
+      console.log(currentCoinCollection)
+
+      // let coinsInCommon = currentCoinState.filter((stateitem) => {
+      //   return currentCoinCollection.some((item) => {
+      //     return item.id === stateitem.id;
+      //   });
+      // });
+      // console.log(coinsInCommon, 'hi')
+      return {...state};
 
     case SORT_GAINERS:
       let allCoins = [...state.coins];

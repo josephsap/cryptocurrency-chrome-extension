@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import { fetchCoins, sortGainers } from '../actions/fetch_coins';
+import { fetchCoins, sortGainers, updateCoinCollection } from '../actions/fetch_coins';
 import { searchFormEntry, addCoin, disableCoin } from '../actions/search_form_entry';
 import { deleteCoin } from '../actions/delete_coin';
 import CoinTable from '../components/coin_table';
@@ -11,7 +11,7 @@ import Gainers from '../components/gainers';
 class AppContainer extends Component {
 
   componentDidMount = () => {
-    // this.timer = setInterval(() => this.getCoins(), 3000);
+    this.timer = setInterval(() => this.getCoins(), 300000);
   }
 
   getCoins = () => {
@@ -19,6 +19,8 @@ class AppContainer extends Component {
     this.props.fetchCoins();
     // need to update redux state here
     // action creator => reducer =>, etc.
+
+    // need to update the coin collection here
   }
 
   render() {
@@ -63,7 +65,7 @@ function mapStateToProps(state) {
 }
 
 function mapDispatchToProps(dispatch) {
-  return bindActionCreators({ searchFormEntry, fetchCoins, addCoin, deleteCoin, disableCoin, sortGainers }, dispatch);
+  return bindActionCreators({ searchFormEntry, updateCoinCollection, fetchCoins, addCoin, deleteCoin, disableCoin, sortGainers }, dispatch);
 }
 
 

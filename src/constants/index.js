@@ -12,3 +12,4 @@ export const ADD_COIN = 'ADD_COIN';
 export const DELETE_COIN = 'DELETE_COIN';
 export const DISABLE_COIN = 'DISABLE_COIN';
 export const SORT_GAINERS = 'SORT_GAINERS';
+export const UPDATE_COINCOLLECTION = 'UPDATE_COINCOLLECTION';
